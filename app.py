@@ -43,7 +43,7 @@ def url_extracter(entities):
             return str(txt)
 @restricted
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Bot for integration with ReadWise api and Telegram. Forward me posts and I will send them to your ReadWise. For more go to https://github.com/ixnet/telewise_bot")
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Bot for integration with ReadWise api and Telegram. Forward me posts and I will send them to your ReadWise. For more go to https://github.com/ixnet/readwise_telegram_bot")
 @restricted
 async def send_to_readwise(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print ("[+][+][+][+][+] Message from " + str(update.effective_user.id))
