@@ -51,32 +51,6 @@ def url_extracter(entities):
 @restricted
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Bot for integration with ReadWise api and Telegram. Forward me posts and I will send them to your ReadWise. For more go to https://github.com/ixnet/telewise_bot")
-
-
-@restricted
-async def prepare_reader(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Sending data to Readwise Reader...")
-    return FORWARD
-
-@restricted
-async def send_to_reader(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # link for the telegram post
-    telegram_link = "https://t.me/" + str(update.message.forward_from_chat.username) + "/" + str(update.message.forward_from_message_id)
-   
-    # if the message contains only text, it will have text_html property, but if the message contains media the text of the message would be in the caption_html property    
-    text = update.message.text_html if update.message.caption_html is None else update.message.caption_html
-   
-    WISE.check_token()
-    #send post as Readwise highlight
-    WISE.save(url=telegram_link,
-        html=text,
-        title = str(update.message.forward_from_chat.username) + " " + str(datetime.now().isoformat()),
-        summary = text[:128])
-    
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Working with Reader API...")
-    return ConversationHandler.END
-
-
 @restricted
 async def send_to_readwise(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print ("[+][+][+][+][+] Message from " + str(update.effective_user.id))
