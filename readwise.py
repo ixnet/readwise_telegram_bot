@@ -27,4 +27,21 @@ class ReadWise:
                         }
         ]}
         )
+
+    def save(self, **kwargs):
+        # if smth is empty in the telegram post send empty string to Readwise 
+        for v in kwargs.values():
+            if v is None:
+                v = ""
+        r = requests.post(url="https://readwise.io/api/v3/save/",headers={"Authorization": "Token %s" % self.token},
+        json=
+            {
+            "url": kwargs.get("url"),
+            "html": kwargs.get("html"),
+            "title": kwargs.get("title"),
+            "summary": kwargs.get("summary"),
+            "should_clean_html": "true"
+            }
+
+        )
     
